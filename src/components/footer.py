@@ -9,3 +9,13 @@ def footer_home():
 
         </div>
             """, unsafe_allow_html=True)
+
+def footer_dashboard():
+   
+    st.markdown(f"""
+        <div style="margin-top: 2rem; text-align: center; display: flex; gap:6px; justify-content: center; align-items: center;">
+                <p style="font-weight: bold; color: black;"> Created with ❤️ by @Ashish</p>
+                
+
+        </div>
+            """, unsafe_allow_html=True)

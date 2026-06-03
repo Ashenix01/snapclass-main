@@ -23,3 +23,28 @@ def header_home():
                 <h1 class="custom-title">SNAP<br/> CLASS</h1>
         </div>
         """, unsafe_allow_html=True)
+
+
+def header_dashboard():
+    logo_url="https://i.ibb.co/YTYGn5qV/logo.png"
+
+    # Global CSS injection
+    st.markdown("""
+        <style>
+        .custom-title {
+            text-align: left;
+            color: blue !important;
+            font-size: 48px;
+            font-weight: bold;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+        <div style="display: flex; align-items: center; justify-content: center; 
+        gap:10px;
+        margin-top: 0px; background-color: #E0E3FF; padding: 10px; border-radius: 10px;">
+                <img src='{logo_url}' style="height:85px;"/>
+                <h2 class="custom-title">SNAP<br/> CLASS</h2>
+        </div>
+        """, unsafe_allow_html=True)
