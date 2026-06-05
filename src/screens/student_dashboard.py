@@ -116,7 +116,7 @@ def student_dashboard():
 
 
 
-
+    st.space(25)
     footer_dashboard()
     
 

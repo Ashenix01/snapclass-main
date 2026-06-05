@@ -18,9 +18,48 @@ def teacher_dashboard():
     
         
 def teacher_dashboard_screen():
+    style_base_layout_dashboard()
+    style_base_layout()
     teacher_data=st.session_state['teacher_data']
     st.title("Teacher Dashboard")
-    st.header(f"Welcome {teacher_data['name']}! Here's your dashboard.")
+    col1, col2=st.columns(2,gap="large")
+    with col1:
+        header_dashboard()
+    with col2:
+        st.subheader(f"Welcome {teacher_data['name']}!")    
+        st.markdown(
+            "<div style='margin-top:10px; display:flex; justify-content:center;'>",
+            unsafe_allow_html=True
+        )
+        if st.button("Logout", type='secondary', key='loginbackbtn', icon=":material/arrow_back:", icon_position="left"):
+            st.session_state['is_logged_in'] = False
+            del st.session_state["teacher_data"]
+            st.rerun()
+
+        st.markdown("</div>", unsafe_allow_html=True)
+    st.space(2)
+    if "current_teacher_tab" not in st.session_state:
+        st.session_state["current_teacher_tab"]="take_attendance"
+    tab1,tab2,tab3 = st.columns(3,gap='xsmall')
+    with tab1:
+        type1 = "primary" if st.session_state["current_teacher_tab"]=="take_attendance" else "tertiary"
+        if st.button("Take Attendance",width='stretch',icon=":material/ar_on_you:",type=type1):
+            st.session_state["current_teacher_tab"]="take_attendance"
+            st.rerun()
+    with tab2:
+        type2 = "primary" if st.session_state["current_teacher_tab"]=="manage_subjects" else "tertiary"
+        if st.button("Manage Subjects",width='stretch',icon=":material/book_ribbon:",type=type2):
+            st.session_state["current_teacher_tab"]="manage_subjects"
+            st.rerun()
+    with tab3:
+        type3 = "primary" if st.session_state["current_teacher_tab"]=="attendance_record" else "tertiary"
+        if st.button("Attendace Records",width='stretch',icon=":material/cards_stack:",type=type3):
+            st.session_state["current_teacher_tab"]="attendance_record"
+            st.rerun()
+
+    st.space(25)
+    footer_dashboard()
+
 
 def login_teacher(username, password):
     teacher=teachers_login(username, password)
@@ -75,7 +114,8 @@ def teacher_dashboard_login():
         if st.button("Register Instead", type='secondary', key='teacherregisterbtn',icon=":material/person_add:", icon_position="left",width='stretch'):
             st.session_state['teacher_login_type']='register'
             st.rerun()
-    
+
+    st.space(25)
     footer_dashboard()
 
 
@@ -142,6 +182,8 @@ def teacher_dashboard_register():
             st.session_state['teacher_login_type']='login'
             st.success("Please login with your credentials.")
             st.rerun()
+
+    st.space(25)
     footer_dashboard()
 
     
