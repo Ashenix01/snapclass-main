@@ -63,6 +63,7 @@ def style_base_layout():
                 font-family: 'Outfit', sans-serif !important;
                 font-size: 1.2rem !important;
         }
+
         button[kind="primary"]{
                 background: blue !important;  
                 border-radius: 1.5rem !important;
