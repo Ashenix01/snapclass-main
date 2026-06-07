@@ -24,6 +24,8 @@ def auto_enroll_dialog(join_code):
         if st.button("Got it!"):
             st.query_params.clear()
             st.rerun()
+    
+    # This thing run when quick enrollment loads fine and perfect
     st.markdown(f"Would you like to enroll in **{subject['name']}**?")
     col1,col2 = st.columns(2)
     with col1:
@@ -34,6 +36,11 @@ def auto_enroll_dialog(join_code):
         if st.button("Yes!! Enroll Now!",type='primary',width='stretch'):
             enroll_student_to_subject(student_id,subject['subject_id'])
             st.toast("Joined Successfully !!!")
+            time.sleep(1)
+            if "pending_join_code" in st.session_state:
+                del st.session_state["pending_join_code"]
             st.query_params.clear()
-            time.sleep(2)
             st.rerun()
+
+            
+            

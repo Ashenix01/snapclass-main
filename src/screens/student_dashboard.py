@@ -32,7 +32,7 @@ def student_dashboard_screen():
             "<div style='margin-top:10px; display:flex; justify-content:center;'>",
             unsafe_allow_html=True
         )
-        if st.button("Logout", type='secondary', key='loginbackbtn', icon=":material/arrow_back:", icon_position="left"):
+        if st.button("Logout", type='secondary', key='loginbackbtn', icon=":material/arrow_back:", icon_position="left",width='stretch'):
             st.session_state['is_logged_in'] = False
             del st.session_state["student_data"]
             st.rerun()
