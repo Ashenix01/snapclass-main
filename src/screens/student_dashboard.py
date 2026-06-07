@@ -68,6 +68,8 @@ def student_dashboard_screen():
         def unenroll_button():
             if st.button("Unenroll from this subject",type='tertiary',key=f"unenroll_{sid}",width='stretch',icon=":material/delete_forever:"):
                 unenroll_student_from_subject(student_id,sid) #sid is subject_id
+                st.toast(f"Unerolled from {sub['name']}")
+                st.rerun()
 
         with cols[i%2]:
             subject_card(
