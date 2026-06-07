@@ -10,6 +10,7 @@ from src.database.db import get_student_subjects,get_student_attendance
 from src.components.dialog_enroll_subject import enroll_subject_dialog
 from src.components.subject_card import subject_card
 from src.database.db import unenroll_student_from_subject
+from src.components.dialog_auto_enroll import auto_enroll_dialog
 from PIL import Image
 import numpy as np
 import time
@@ -92,6 +93,16 @@ def student_dashboard_screen():
 def student_dashboard():
     style_base_layout_dashboard()
     style_base_layout()
+    # if pending join state is there and user is logged in it will direct to auto enroll page
+    if (
+        st.session_state.get("is_logged_in", False)
+        and "pending_join_code" in st.session_state and st.session_state["user_role"]=="student"
+    ):
+        auto_enroll_dialog(
+            st.session_state["pending_join_code"]
+        )
+
+
     show_registration=False
     if "student_data" in st.session_state:
         student_dashboard_screen()
