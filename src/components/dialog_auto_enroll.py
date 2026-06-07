@@ -24,6 +24,7 @@ def auto_enroll_dialog(join_code):
         if st.button("Got it!"):
             st.query_params.clear()
             st.rerun()
+        return 
     
     # This thing run when quick enrollment loads fine and perfect
     st.markdown(f"Would you like to enroll in **{subject['name']}**?")
