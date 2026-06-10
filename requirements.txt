@@ -1,3 +1,4 @@
+streamlit
 numpy
 pandas
 
@@ -18,7 +19,7 @@ segno
 # for image processing
 pillow
 
-streamlit
+
 
 #for voice preprocesing and recognition
 librosa

@@ -67,20 +67,20 @@ def get_trained_model():
 
 def train_classifier():
     st.cache_resource.clear()
-    model_data=get_trained_model() 
+    model_data=get_trained_model() #cached function so if you call again you will get the trained cached model 
     return bool(model_data)
 
 def predict_attendance(class_image_np):
     embeddings=get_face_embeddings(class_image_np)
     detected_students={}
-    model_data = get_trained_model()
+    model_data = get_trained_model() # we called again we will get trained model after new student added from cachedd memory
 
     if not model_data:
         return detected_students,[],len(embeddings)
     
     clf = model_data['clf']
-    X_train=model_data['X']
-    y_train=model_data['y']
+    X_train=model_data['X'] #embedding
+    y_train=model_data['y'] #student_id
 
     all_students=sorted(list(set(y_train)))
 
@@ -94,7 +94,7 @@ def predict_attendance(class_image_np):
         best_match_score = np.linalg.norm(student_embedding-embedding)
         resemblance_threshold = 0.6
         if best_match_score <= resemblance_threshold:
-            detected_students[predicted_id]=True
+            detected_students[predicted_id]=True # student_id = True means present
 
     return detected_students,all_students,len(embeddings)
 
