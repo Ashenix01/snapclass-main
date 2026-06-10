@@ -9,6 +9,8 @@ def show_attendance_result(results,attendance_log):
         col1,col2 = st.columns(2)
         with col1:
             if st.button("Discard",width='stretch',type='secondary') :
+                st.session_state["attendance_image"]=[]
+                st.session_state["voice_attendance_result"]=None
                 st.rerun()
         with col2:
             if st.button("Confirm & save ",type='primary',width='stretch'):

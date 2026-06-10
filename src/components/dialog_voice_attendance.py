@@ -10,6 +10,9 @@ def voice_attendance_dialog(subject_id):
     audio_data=None
     audio_data = st.audio_input("Record classroom audio")
     if st.button("Analyse Audio",type='primary',width='stretch'):
+        if audio_data is None:
+            st.warning("Please record audio first.")
+            return
         with st.spinner("AI is recognising the voice....."):
             enrolled_res=supabase.table("subject_students").select("*,students(*)").eq('subject_id',subject_id).execute()
             enrolled_students=enrolled_res.data
@@ -34,7 +37,7 @@ def voice_attendance_dialog(subject_id):
                 results.append({
                     "Name":student['name'],
                     "ID":student["student_id"],
-                    "Source":", ".join(score) if is_present else "-",
+                    "Source": "Voice" if is_present else "-",
                     "Status": "✅ Present" if is_present else "❌ Absent"
                 })
                 attendance_to_log.append({
